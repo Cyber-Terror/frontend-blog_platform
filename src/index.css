@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-mauve-700 text-mauve-200 antialiased text-lg font-medium leading-relaxed;
+  }
+}
