@@ -1,9 +1,9 @@
 # Blog Client (React Frontend)
 
-Frontend-клиент для `blog-platform` (NestJS REST API).  
-Проект сделан на React + TypeScript + Vite, со стилями Tailwind CSS.
+Frontend client for the `blog-platform` NestJS REST API.  
+Built with React + TypeScript + Vite and styled with Tailwind CSS.
 
-## Стек
+## Tech Stack
 
 - React 19 + TypeScript
 - Vite
@@ -13,76 +13,75 @@ Frontend-клиент для `blog-platform` (NestJS REST API).
 - react-hot-toast
 - react-icons
 
-## Что реализовано
+## Implemented Features
 
-- Регистрация и логин (`/auth/register`, `/auth/login`, `/auth/me`)
-- Просмотр списка постов и отдельного поста
-- Создание, редактирование, удаление постов (для автора)
-- Загрузка изображения к посту (`POST /upload/file`)
-- Комментарии к посту:
-  - просмотр доступен всем
-  - создание — только авторизованным
-  - удаление — автор комментария или автор поста
-  - подгрузка по 5 комментариев (`Load more`)
-- Теги:
-  - список тегов в сайдбаре
-  - фильтрация постов по `?tag=...`
-- Страница `My posts`
-- Обработка состояний: loading/spinner, ошибки API, toast-уведомления
-- Глобальные axios interceptors: `401` → logout+redirect `/login`, `429` → toast
-- Страница `404`
+- Authentication: register, login, current user (`/auth/register`, `/auth/login`, `/auth/me`)
+- Posts: list, detail view, create, edit, delete (author only)
+- Image upload for posts (`POST /upload/file`)
+- Comments:
+  - public comment reading
+  - create for authenticated users
+  - delete by comment author or post author
+  - load more pagination (5 comments per request)
+- Tags:
+  - tag list in sidebar
+  - filter posts by `?tag=...`
+- `My posts` page
+- UI states: loading spinners, API errors, toast notifications
+- Global Axios interceptors: `401` -> clear token + redirect to `/login`, `429` -> toast notification
+- `404 Not Found` page
 
-## Требования
+## Requirements
 
-- Node.js 20+ (рекомендуется актуальный LTS)
-- Запущенный backend `blog-platform`
+- Node.js 20+ (latest LTS recommended)
+- Running `blog-platform` backend
 
-## Переменные окружения
+## Environment Variables
 
-Создай `.env` в корне `fr_blog-client`:
+Create a `.env` file in the `fr_blog-client` root:
 
 ```env
 VITE_API_URL=http://localhost:3000
 ```
 
-> Если backend задеплоен, укажи его URL в `VITE_API_URL`.
+> If your backend is deployed, set `VITE_API_URL` to your backend URL.
 
-## Установка и запуск
+## Installation and Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Приложение откроется на `http://localhost:5173`.
+The app will be available at `http://localhost:5173`.
 
-## Сборка и preview
+## Build and Preview
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Скрипты
+## Scripts
 
-- `npm run dev` — запуск dev-сервера
-- `npm run build` — TypeScript build + production build Vite
-- `npm run lint` — проверка oxlint
-- `npm run preview` — локальный preview production-сборки
+- `npm run dev` — start development server
+- `npm run build` — TypeScript build + Vite production build
+- `npm run lint` — run oxlint
+- `npm run preview` — preview production build locally
 
-## Структура (основное)
+## Project Structure (Main)
 
 ```text
 src/
-  api/         # axios client + запросы auth/posts/comments/tags/upload
-  components/  # UI-компоненты (Layout, Spinner, CommentList и т.д.)
+  api/         # Axios client and API requests (auth/posts/comments/tags/upload)
+  components/  # UI components (Layout, Spinner, CommentList, etc.)
   context/     # AuthContext
-  pages/       # страницы роутинга
-  types/       # общие TS-типы
+  pages/       # Route pages
+  types/       # Shared TypeScript types
 ```
 
-## Важные заметки по API
+## API Notes
 
-- Ответы backend оборачиваются в `{ data, meta }`.
-- Комментарии: чтение публичное, создание/изменение/удаление требуют Bearer token.
-- Для загрузки изображений используется `FormData` с полем `file`.
+- Backend responses are wrapped in `{ data, meta }`.
+- Comments: reading is public; create/update/delete require a Bearer token.
+- Image upload uses `FormData` with the `file` field.
